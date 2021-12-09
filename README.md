@@ -11,7 +11,8 @@ You can find a comprehensive list of supported APIs on our [☑️ Feature Cover
 
 # Localstack blueprint overview 
 
-Localstack blueprint deployment will :
+
+Localstack blueprint deployemnt will :
 
 * Create a new VM
 * Connect it to an existing network

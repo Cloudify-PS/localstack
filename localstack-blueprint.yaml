@@ -151,3 +151,8 @@ node_templates:
       use_external_resource: true
       resource_config:
         id: { get_secret: private_network_name }
+
+capabilities:
+      url:
+        description: ip and port of the localstack application
+        value: { concat: [ 'http://', { get_attribute: [server_host, public_ip] }, ':', 4566 ] }
