@@ -46,7 +46,7 @@ finish_localstack_install ()
 {
     sudo systemctl start docker
     if [ $? -ne 0 ]; then
-        echo "ERROR: docker service is not started properly!
+        echo "ERROR: docker service is not started properly!"
         exit 1
     fi
     sudo usermod -a -G docker $USER
