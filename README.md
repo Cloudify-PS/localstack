@@ -11,6 +11,7 @@ You can find a comprehensive list of supported APIs on our [☑️ Feature Cover
 
 # Localstack blueprint overview 
 
+
 Localstack blueprint deployemnt will :
 
 * Create a new VM
