@@ -55,6 +55,8 @@ dsl_definitions:
     project_domain_name: { get_input: project_domain_name }
 
 node_templates:
+
+### Using keypair in your OpenStack env
   keypair:
     type: cloudify.nodes.openstack.KeyPair
     properties:
@@ -62,12 +64,15 @@ node_templates:
       resource_config:
         name: { get_input: key_pair_name }
       client_config: *openstack_config
+### Allocate Floating IP from external network existing in you OpenStack env
   virtual_ip:
     type: cloudify.nodes.openstack.FloatingIP
     properties:
       client_config: *openstack_config
       resource_config:
         floating_network_id: { get_secret: external_network_id }
+
+### Creates new Security group with required ports to be opened in order to ssh connect to localstack host and for interaction with localstack app 
   security_group:
     type: cloudify.nodes.openstack.SecurityGroup
     properties:
@@ -82,16 +87,14 @@ node_templates:
           port_range_max: 22
         - direction: ingress
           protocol: tcp
-          port_range_min: 80
-          port_range_max: 80
-        - direction: ingress
-          protocol: tcp
           port_range_min: 4566
           port_range_max: 4566
         - direction: ingress
           protocol: tcp
           port_range_min: 4571
           port_range_max: 4571
+
+### VM that will host localstack application
   server_host:
     type:  cloudify.nodes.openstack.Server
     properties:
@@ -132,6 +135,7 @@ node_templates:
       - type: cloudify.relationships.openstack.port_connected_to_security_group
         target: security_group
 
+### Will connect to an existing private network 
   private_subnet:
     type: cloudify.nodes.openstack.Subnet
     properties:
