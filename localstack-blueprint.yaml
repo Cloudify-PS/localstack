@@ -95,7 +95,6 @@ node_templates:
   server_host:
     type:  cloudify.nodes.openstack.Server
     properties:
-#      ip: { get_attribute: [virtual_ip, floating_ip_address] }
       resource_config:
         name:  { get_input: server_name }
       client_config: *openstack_config
@@ -112,8 +111,6 @@ node_templates:
         target: keypair
       - type: cloudify.relationships.openstack.server_connected_to_floating_ip
         target: virtual_ip
-      - type: cloudify.relationships.openstack.port_connected_to_security_group
-        target: security_group 
   localstack_app:
     type: cloudify.nodes.ApplicationModule
     interfaces:
@@ -132,6 +129,8 @@ node_templates:
         target: private_network
       - type: cloudify.relationships.depends_on
         target: private_subnet
+      - type: cloudify.relationships.openstack.port_connected_to_security_group
+        target: security_group
 
   private_subnet:
     type: cloudify.nodes.openstack.Subnet
