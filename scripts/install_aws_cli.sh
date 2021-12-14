@@ -21,9 +21,10 @@ finish_cli_install ()
    curl ${awsclizip} -o "awscliv2.zip"
    if [ $? -ne 0 ]; then
       echo "ERROR: download of ${awsclizip} is failed!"
+   fi
    unzip awscliv2.zip > /dev/null 2>&1
    if [ $? -ne 0 ]; then
-      echo "ERROR: unzip command returned exit code $?!
+      echo "ERROR: unzip command returned exit code $?!"
       exit 1
    fi 
    sudo ./aws/install
