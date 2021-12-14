@@ -94,7 +94,7 @@ node_templates:
           port_range_min: 4571
           port_range_max: 4571
 
-### VM that will host localstack application
+### Create VM that will host localstack application
   server_host:
     type:  cloudify.nodes.openstack.Server
     properties:
@@ -114,6 +114,7 @@ node_templates:
         target: keypair
       - type: cloudify.relationships.openstack.server_connected_to_floating_ip
         target: virtual_ip
+### Deploy and run localstack app
   localstack_app:
     type: cloudify.nodes.ApplicationModule
     interfaces:
